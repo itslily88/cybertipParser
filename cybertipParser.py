@@ -112,7 +112,7 @@ def ipFile(inFile, outputPath, key):
     workbook.save(f'''{outputPath}/{newFile}''')
     workbook.close()
 
-    print(f'''A total of {len(ipList)} have been parsed from the cybertip and queried. {newFile} has been created!''')
+    print(f'''A total of {len(ipList)} IP addresses have been parsed from the cybertip and queried. {newFile} has been created!''')
 
 def suspectInfo(data):
     # CTs appear to have no consistency in how they store key:value pairs. Sometimes, its NULL, or doesnt exist at all
@@ -241,7 +241,7 @@ def main():
     outputPath = os.path.dirname(jsonFile)
     
     # Get the directory of the current script
-    scriptDirectory = os.path.dirname(os.path.abspath(__file__))
+    scriptDirectory = os.getcwd()
     
     # Path to 'apiKey.txt' in the same directory as the script
     apiFilePath = os.path.join(scriptDirectory, 'apiKey.txt')
