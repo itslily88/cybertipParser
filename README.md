@@ -1,5 +1,5 @@
 # cybertipParser
-Python3. Intakes json file from an ICAC Cybertip, outputs an excel file parsing out the IP addresses with ISP queries and an excel file parsing out the media.
+Python3. Intakes json file from an ICAC Cybertip, outputs an excel file parsing out the IP addresses with ISP queries and an excel file parsing out the media. The .exe is intended for investigators without python experience and is just compiled from the raw code with auto-py-to-exe (GUI for pyinstaller).
 
 # Requirements:
 - pip install openpypl, requests
