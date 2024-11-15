@@ -34,10 +34,6 @@ def formatWorksheet(worksheet, headerRow):
         worksheet.column_dimensions[column].width = adjustedWidth
 
 def ipFile(inFile, outputPath, key):
-    # Arin.net timesout after 100 queries, so to limit the possibility of that, we cache IPs
-    # Also, create a counter for new IPs with a timer in case we hit 90 in a minute
-    cachedIPs = {}
-
     # convert the input to a Python dictionary using the json.loads() function
     with open(inFile, 'r', encoding='utf-8-sig') as file: data = json.load(file)
 
@@ -91,7 +87,7 @@ def ipFile(inFile, outputPath, key):
     ipList = []
     for a in parsedIPs: 
         if a[0] != 'IP Address': ipList.append(a[0])
-    
+
     # New dictionary with return
     ispDict = queryIP(ipList, key)
 
@@ -206,7 +202,6 @@ def mediaFile(inFile, outputPath):
                 ncmecTags += f'''{a['tags'][0]['value']}'''
         if uploadedFile['additionalInformations']: additionalInformation = uploadedFile['additionalInformations'][0]['value']
 
-                    
         # Add to list
         parsedMedia.append([filename, originalFilename, event, ipAddress, formattedDateTime, industryClassification, viewedByEsp, ncmecTags, verificationHash, additionalInformation])
     
@@ -221,7 +216,7 @@ def mediaFile(inFile, outputPath):
     workbook.save(f'''{outputPath}/{newFile}''')
     workbook.close()
 
-    print(f'''A total of {totalUploads} media files have been parse from the cybertip. {newFile} has been created!''')
+    print(f'''A total of {totalUploads} media files have been parsed from the cybertip. {newFile} has been created!''')
     
 def main():
     # Check if file path was passed (as it would be when dragging and dropping or via command-line)
