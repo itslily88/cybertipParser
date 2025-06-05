@@ -63,7 +63,7 @@ def queryIP(inIPs: list, apiKey: str ='') -> dict:
                 sleep(0.5)
                 attempts += 1
                 response = 'Could not connect to arin.net'
-        
+
         # If data is returned valid, parse. If not, return error.
         if type(response) == str:
             output[ipAddress] = response
@@ -71,6 +71,10 @@ def queryIP(inIPs: list, apiKey: str ='') -> dict:
             data = response.json()
             orgRef = data['net'].get('orgRef', {})  # Use .get() to handle missing 'orgRef'
             orgName = orgRef.get('@name', 'Org Name Not Found')  # Provide a default value
+            # Sometimes the orgRef is substituted by customerRef. This will check that.
+            if orgName ==  'Org Name Not Found':
+                orgRef = data['net'].get('customerRef', {})
+                orgName = orgRef.get('@name', 'Org Name Not Found') 
             output[ipAddress] = orgName
         else:
             return(f'Error: {response.status_code}')
